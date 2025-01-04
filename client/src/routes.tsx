@@ -6,6 +6,8 @@ import NotFound from "./404"; // Import NoPage component
 
 import About from "./pages/about";
 import Home from "./pages/home/home";
+import Signup from "./pages/auth/signup";
+import SignIn from "./pages/auth/signIn";
 
 const AppRouter = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const AppRouter = createBrowserRouter([
       {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "Signup",
+        element: <Signup />,
+      },
+      {
+        path: "SignIn",
+        element: <SignIn />,
       },
     ],
   },
