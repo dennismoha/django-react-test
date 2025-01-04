@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-# from .models import Note
+from .models import PatientHistory
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,3 +13,9 @@ class UserSerializer(serializers.ModelSerializer):
         print(validated_data)
         user = User.objects.create_user(**validated_data)
         return user
+
+class PatientHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PatientHistory
+        fields = ["id", "title", "content", "created_at", "author"]
+        extra_kwargs = {"author": {"read_only": True}}
