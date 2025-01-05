@@ -11,6 +11,7 @@ import {
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 import { HospitalAPI as api} from './api'
+import authReducer from '../features/auth/auth-slice'
 
 
 
@@ -55,6 +56,7 @@ const persistConfig = {
 };
 const rootReducer = combineReducers({
   global: GlobalReducer,
+  auth: authReducer,
   [api.reducerPath]: api.reducer
 
   
