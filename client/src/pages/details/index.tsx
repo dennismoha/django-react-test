@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
 import PatientsRecord from "../../components/card-section/";
-import { useGetPatientRecordsQuery, useDeletePatientRecordMutation, useCreatePatientRecordMutation, PatientRecord } from "../../store/api";
+import { useGetPatientRecordsQuery } from "../../store/api";
 import "../../assets/styles/detail.css";
 
 function Details() {
-  const [content, setContent] = useState("");
-  const [title, setTitle] = useState("");
-
-  const { data: patientRecords, error, isLoading } = useGetPatientRecordsQuery();
-  const [deletePatientRecord] = useDeletePatientRecordMutation();
-  const [createPatientRecord] = useCreatePatientRecordMutation();
+  const {
+    data: patientRecords,
+    error,
+    isLoading,
+  } = useGetPatientRecordsQuery();
 
   if (isLoading) {
     return <p>Loading ....</p>;
   }
+
+  if (error) return <div> error fetching patients records</div>;
 
   return (
     <div>

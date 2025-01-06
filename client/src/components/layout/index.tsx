@@ -71,20 +71,7 @@ export default function Example() {
               </Link>
             </div>
           )}
-          {/* <div className="hidden md:flex space-x-4">
-        <Link
-          to="/signup"
-          className="text-white hover:text-blue-300 transition duration-200"
-        >
-          Sign Up
-        </Link>
-        <Link
-          to="/signin"
-          className="text-white hover:text-blue-300 transition duration-200"
-        >
-          Sign In
-        </Link>
-      </div> */}
+   
 
           {/* Mobile Menu Button */}
           <button className="md:hidden text-white" onClick={toggleMenu}>
@@ -131,23 +118,4 @@ export default function Example() {
   );
 }
 
-// const Layout = () => {
-//   return (
-//     <>
-//       <nav >
-//         <ul style={{display:'flex' , flexDirection:'row', justifyContent:'space-around'}}>
-//           <li>
-//             <Link to="/">Home</Link>
-//           </li>
-//           <li>
-//             <Link to="/about">About</Link>
-//           </li>
-//         </ul>
-//       </nav>
 
-//       <Outlet />
-//     </>
-//   )
-// };
-
-// export default Layout;

@@ -2,12 +2,12 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { UserDetails, userDetailsResponse } from "../interfaces";
  import { RootState } from "./store";
 
- // types/PatientRecord.ts
+
 export interface PatientRecord {
-  id: string; // ID of the record
-  title: string; // Title of the record (e.g., diagnosis, observation)
-  content: string; // Content of the record (e.g., details about diagnosis or treatment)
-  created_at: string; // Timestamp when the record was created
+  id: number; // ID of the record
+  title: string; 
+  content: string; 
+  created_at: string; 
 }
 
 export const HospitalAPI = createApi({
@@ -29,7 +29,7 @@ export const HospitalAPI = createApi({
   reducerPath: "HospitalApi",
   tagTypes: [
     'patients',
-    'patient-history'
+    'patientrecords'
   ],
   endpoints: (build) => ({
     getPatientsData: build.query({
@@ -42,7 +42,7 @@ export const HospitalAPI = createApi({
         method: "POST",
         body: newUser,
       }),
-      invalidatesTags: ["patients"],
+      invalidatesTags: ["patients",],
     }),
     PatientLoginData: build.mutation<{refresh:string , access:string}, UserDetails>({
       query: (newUser) => ({
@@ -62,24 +62,25 @@ export const HospitalAPI = createApi({
     }),
     getPatientRecords: build.query<PatientRecord[], void>({
       query: () => '/patient-history/',
-      providesTags: ["patient-history"],
+      providesTags: [{type:"patientrecords"}],
     }),
 
     // Delete a patient record
-    deletePatientRecord: build.mutation<void, string>({
+    deletePatientRecord: build.mutation<void, number>({
       query: (id) => ({
-        url: `/api/patient-records/delete/${id}/`,
-        method: 'DELETE',
+        url: `/patient-history/delete/${id}/`,
+        method: 'DELETE',       
       }),
+      invalidatesTags: [{type:"patientrecords"}],
     }),
 
     createPatientRecord: build.mutation<void, { title: string; content: string }>({
       query: ({ title, content }) => ({
         url: '/patient-history/',
         method: 'POST',
-        body: { title, content },
-        providesTags: ["patient-history"],
+        body: { title, content },        
       }),
+      invalidatesTags: [{type:"patientrecords"}],
     }),
     
 

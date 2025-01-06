@@ -7,6 +7,7 @@ import { RouterProvider } from "react-router-dom";
 import AppRouter from "./routes.tsx";
 import './index.css'; // Import tailwind.css
 
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <StoreProvider>

@@ -10,10 +10,8 @@ import {
 } from "react-redux";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
-import { HospitalAPI as api} from './api'
-import authReducer from '../features/auth/auth-slice'
-
-
+import { HospitalAPI as api } from "./api";
+import authReducer from "../features/auth/auth-slice";
 
 import {
   persistStore,
@@ -27,7 +25,7 @@ import {
 } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
-import GlobalReducer  from "../globals/features/dark-mode-slice";
+import GlobalReducer from "../globals/features/dark-mode-slice";
 
 /* REDUX PERSISTENCE */
 const createNoopStorage = () => {
@@ -52,14 +50,12 @@ const storage =
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["global", "categories"],
+  whitelist: ["global", "auth"],
 };
 const rootReducer = combineReducers({
   global: GlobalReducer,
   auth: authReducer,
-  [api.reducerPath]: api.reducer
-
-  
+  [api.reducerPath]: api.reducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -73,7 +69,7 @@ export const makeStore = () => {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
       }).concat(api.middleware),
-      devTools: true
+    devTools: true,
   });
 };
 
@@ -87,22 +83,22 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 /* PROVIDER */
 
 export default function StoreProvider({
-    children,
-  }: {
-    children: React.ReactNode;
-  }) {
-    const storeRef = useRef<AppStore>();
-    if (!storeRef.current) {
-      storeRef.current = makeStore();
-      setupListeners(storeRef.current.dispatch);
-    }
-    const persistor = persistStore(storeRef.current);
-  
-    return (
-      <Provider store={storeRef.current}>
-        <PersistGate loading={null} persistor={persistor}>
-          {children}
-        </PersistGate>
-      </Provider>
-    );
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const storeRef = useRef<AppStore>();
+  if (!storeRef.current) {
+    storeRef.current = makeStore();
+    setupListeners(storeRef.current.dispatch);
   }
+  const persistor = persistStore(storeRef.current);
+
+  return (
+    <Provider store={storeRef.current}>
+      <PersistGate loading={null} persistor={persistor}>
+        {children}
+      </PersistGate>
+    </Provider>
+  );
+}

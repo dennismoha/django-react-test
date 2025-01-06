@@ -9,12 +9,7 @@ interface ProtectedRouteProps {
   element: React.ReactNode;
 }
 
-// const isAuthenticated = (): boolean => {
-   
- 
-//  // return !!localStorage.getItem("userToken"); 
-//   return true;
-// };
+
 
 
    
@@ -53,11 +48,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
     }
     
 
- 
-//     if (!isAuthenticated()) {
 
-//     return <Navigate to="/signIn" />;
-//   }
 
   return <>{element}</>; // Return the protected element if authenticated
 };
